@@ -5,7 +5,9 @@
 
   vars:
     #dns_domain:
-    dns_nameservers: ['8.8.8.8', '8.8.4.4']
+    dns_nameservers:
+      - '8.8.8.8'
+      - '8.8.4.4'
     #dns_searchs:
 
   tasks:
