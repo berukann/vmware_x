@@ -22,10 +22,10 @@
       state: removed
 
   - name: install cert chain
-    shell: "rpm -Uvh http://{{ spacewalk_server }}/pub/rhn-org-trusted-ssl-cert-1.0-2.noarch.rpm"
+    command: "rpm -Uvh http://{{ spacewalk_server }}/pub/rhn-org-trusted-ssl-cert-1.0-2.noarch.rpm"
 
   - name: register spacewalk client
-    shell: "rhnreg_ks --force --serverUrl=https://{{ spacewalk_server }}/XMLRPC --activationkey={{ activation_key }}"
+    command: "rhnreg_ks --force --serverUrl=https://{{ spacewalk_server }}/XMLRPC --activationkey={{ activation_key }}"
     when: activation_key is defined
 
   - name: install channel GPG key
