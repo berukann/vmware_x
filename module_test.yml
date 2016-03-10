@@ -1,0 +1,35 @@
+---
+- name: Test Custom Modules Book
+  connection: local
+  hosts: localhost
+  tasks:
+  - name: Clone template to VM
+    vmware_clone_to_folder:
+      hostname: "{{hostname}}"
+      username: "{{username}}"
+      password: "{{password}}"
+      template_location: "{{templateLocation}}"
+      destination: "{{vmLocation}}"
+      validate_certs: False
+
+  - name: Test add iSCSI device
+    vmware_add_hdd:
+      hostname: "{{hostname}}"
+      username: "{{username}}"
+      password: "{{password}}"
+      thinDisk: True
+      vm: "{{vmLocation}}"
+      diskSize: "{{diskSize}}"
+      validate_certs: False
+
+  - name: Create NIC
+    vmware_nic:
+      vm_path: "{{vmLocation}}"
+      state: create
+      hostname: "{{hostname}}"
+      username: "{{username}}"
+      password: "{{password}}"
+      datacenter: "{{datacenter}}"
+      network_name: "{{networkName}}"
+      type: "{{interfaceType}}"
+      validate_certs: False
